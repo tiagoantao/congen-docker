@@ -7,7 +7,11 @@ RUN conda config --add channels r
 
 
 RUN conda install -y bwa samtools picard
-RUN conda install -y vcftools plink
+RUN conda install -y vcftools plink2
 
 RUN conda install -y stacks
 
+
+RUN mkdir /data
+
+VOLUME /data
