@@ -1,0 +1,25 @@
+???
+Structure
+
+INFORM STUDENTS
+RStudio
+RKWard
+
+MINOR QUESTIONS
+angsd+ngstools
+lep-map2
+mstmap
+
+ASK
+neestimator
+
+MANUAL
+gatk
+
+DONE
+stacks
+bwa
+samtools (version!)
+picard
+vcftools
+Plink
