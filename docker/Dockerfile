@@ -2,7 +2,7 @@ FROM continuumio/anaconda3
 MAINTAINER tiagoantao@gmail.com
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get install -y xfce4 vnc4server
+RUN apt-get install -y xfce4 vnc4server firefox-esr
 
 RUN conda update --all
 RUN conda config --add channels bioconda
@@ -44,6 +44,7 @@ WORKDIR /
 
 RUN mkdir /root/.vnc
 COPY xstartup /root/.vnc
+COPY passwd /root/.vnc
 RUN chmod a+x /root/.vnc/xstartup
 
 RUN mkdir /data
