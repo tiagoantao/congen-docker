@@ -2,7 +2,11 @@ FROM continuumio/anaconda3
 MAINTAINER tiagoantao@gmail.com
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get install -y xfce4 vnc4server firefox-esr
+RUN apt-get update
+RUN apt-get install -y xfce4 vnc4server
+RUN apt-get install -y build-essential zlib1g-dev libgsl0-dev
+RUN apt-get install -y unzip
+RUN apt-get install -y firefox-esr
 
 RUN conda update --all
 RUN conda config --add channels bioconda
@@ -15,7 +19,6 @@ RUN conda install -y stacks
 
 
 RUN git clone --recursive https://github.com/mfumagalli/ngsTools.git
-RUN apt-get install -y build-essential zlib1g-dev libgsl0-dev
 WORKDIR ngsTools
 RUN make
 WORKDIR /
@@ -33,7 +36,6 @@ WORKDIR /MSTMap
 RUN make
 WORKDIR /
 
-RUN apt-get install unzip
 RUN wget https://sourceforge.net/projects/lepmap2/files/binary%2Bcode.zip/download -O bincode.zip
 RUN mkdir /bincode
 WORKDIR /bincode
@@ -47,8 +49,16 @@ COPY xstartup /root/.vnc
 COPY passwd /root/.vnc
 RUN chmod a+x /root/.vnc/xstartup
 
+RUN git clone https://github.com/kanaka/noVNC.git
+WORKDIR noVNC
+RUN git clone https://github.com/kanaka/websockify
+WORKDIR /
+
 RUN mkdir /data
 VOLUME /data
 
-EXPOSE 5901
-CMD vncserver :1 -geometry 1024x768
+COPY run.sh run.sh
+RUN chmod a+x run.sh
+
+EXPOSE 5901 80
+CMD run.sh
