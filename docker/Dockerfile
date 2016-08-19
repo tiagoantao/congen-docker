@@ -7,6 +7,7 @@ RUN apt-get install -y xfce4 vnc4server
 RUN apt-get install -y build-essential zlib1g-dev libgsl0-dev
 RUN apt-get install -y unzip
 RUN apt-get install -y firefox-esr
+RUN apt-get install -y net-tools
 
 RUN conda update --all
 RUN conda config --add channels bioconda
@@ -45,12 +46,14 @@ WORKDIR /
 
 
 RUN mkdir /root/.vnc
+RUN echo congen16 > pass; echo congen16 >> pass; vncpasswd < pass; rm pass
 COPY xstartup /root/.vnc
-COPY passwd /root/.vnc
 RUN chmod a+x /root/.vnc/xstartup
 
 RUN git clone https://github.com/kanaka/noVNC.git
-WORKDIR noVNC
+WORKDIR /noVNC
+RUN cp vnc_auto.html index.html
+WORKDIR /noVNC/utils
 RUN git clone https://github.com/kanaka/websockify
 WORKDIR /
 
@@ -60,5 +63,5 @@ VOLUME /data
 COPY run.sh run.sh
 RUN chmod a+x run.sh
 
-EXPOSE 5901 80
-CMD run.sh
+CMD ./run.sh
+EXPOSE 5901 6080
