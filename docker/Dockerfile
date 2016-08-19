@@ -1,6 +1,9 @@
 FROM continuumio/anaconda3
 MAINTAINER tiagoantao@gmail.com
 
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get install -y xfce4 vnc4server
+
 RUN conda update --all
 RUN conda config --add channels bioconda
 RUN conda config --add channels r
@@ -35,9 +38,16 @@ RUN wget https://sourceforge.net/projects/lepmap2/files/binary%2Bcode.zip/downlo
 RUN mkdir /bincode
 WORKDIR /bincode
 RUN unzip ../bincode
+WORKDIR /
 
+
+
+RUN mkdir /root/.vnc
+COPY xstartup /root/.vnc
+RUN chmod a+x /root/.vnc/xstartup
 
 RUN mkdir /data
-
-
 VOLUME /data
+
+EXPOSE 5901
+CMD vncserver :1 -geometry 1024x768
