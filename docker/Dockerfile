@@ -26,7 +26,7 @@ WORKDIR /
 
 RUN wget http://www.mstmap.org/MSTMap.source.tar.gz
 RUN tar zxf MSTMap.source.tar.gz
-WORKDIR /MSTMAP
+WORKDIR /MSTMap
 RUN make
 WORKDIR /
 
