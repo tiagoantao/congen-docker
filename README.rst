@@ -11,7 +11,11 @@ How to run it
 
 **Linux**
 
-Install docker.
+- Install docker
+
+- Make sure the docker server is running
+
+- Your user has to be on the docker group
 
 - ``docker pull tiagoantao/congen-docker`` 
 
