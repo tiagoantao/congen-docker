@@ -47,7 +47,7 @@ You can also connect directly via ssh. User root, password congen16.
 
 - Your user has to be on the docker group
 
-- ``docker pull tiagoantao/congen-docker`` 
+- ``docker pull tiagoantao/congen-docker``
 
 - ``docker run -p 6080:6080 -v /path_to_your_data:/data -t tiagoantao/congen-docker``
 
@@ -60,5 +60,4 @@ You can also connect directly via ssh. User root, password congen16.
 
 
 
-.. Kitematic_: https://kitematic.com/
-
+.. _Kitematic: https://kitematic.com/
