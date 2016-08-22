@@ -17,6 +17,28 @@ Just point your VNC server to port 5901.
 You can also connect directly via ssh. User root, password congen16.
 
 
+**If you are on Windows or Mac (see below for Linux)**
+
+- Install Kitematic_ (Docker Toolbox).
+
+- Pull tiagoantao/congen_docker
+
+- Run it
+
+- Go to settings (see image below)
+
+.. image:: Docker_screenshot.png
+
+- Click on the 6080 port (see below)
+
+.. image:: Docker_screenshot_portsetttings.png
+
+- This should start a browser
+
+- Password is `congen16`
+
+
+
 **What to do if your base operating system is Linux**
 
 - Install docker
@@ -37,25 +59,6 @@ You can also connect directly via ssh. User root, password congen16.
 
 
 
-**Win/Mac**
 
-- Install Kitematic_ (Docker Toolbox).
-
-- Pull tiagoantao/congen_docker
-
-- Run it
-
-- Go to settings (see image below)
-
-.. image:: Docker_screenshot.png
-
-- Click on the 6080 port (see below)
-
-.. image:: Docker_screenshot_portsetttings.png
-
-- This should start a browser
-
-- Password is `congen16`
-
-. Kitematic_:: https://kitematic.com/
+.. Kitematic_: https://kitematic.com/
 
