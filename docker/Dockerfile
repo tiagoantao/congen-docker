@@ -23,6 +23,7 @@ RUN git clone --recursive https://github.com/mfumagalli/ngsTools.git
 WORKDIR ngsTools
 RUN make
 WORKDIR /
+RUN cp /ngsTools/angsd/angsd /usr/bin
 
 
 #RUN git clone https://github.com/angsd/angsd.git
