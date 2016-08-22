@@ -16,14 +16,18 @@ Just point your VNC server to port 5901.
 
 You can also connect directly via ssh. User root, password congen16.
 
+You will have root access and that is fine. There will be no special user.
+
 
 **If you are on Windows or Mac (see below for Linux)**
 
 - Install Kitematic_ (Docker Toolbox).
 
-- Pull tiagoantao/congen_docker
+- Start it
 
-- Run it
+- Pull tiagoantao/congen_docker (using the search box)
+
+- Make the congen container is running (UI - see below)
 
 - Go to settings (see image below)
 
