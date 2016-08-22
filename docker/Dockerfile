@@ -51,6 +51,7 @@ COPY xstartup /root/.vnc
 RUN chmod a+x /root/.vnc/xstartup
 
 RUN git clone https://github.com/kanaka/noVNC.git
+COPY launch.sh /noVNC/utils
 WORKDIR /noVNC
 RUN cp vnc_auto.html index.html
 WORKDIR /noVNC/utils
@@ -60,14 +61,17 @@ WORKDIR /
 RUN mkdir /data
 VOLUME /data
 
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
 RUN ssh-keygen -A
-RUN echo root:congen16 | chpasswd
-RUN echo PermitRootLogin yes >> /etc/ssh/sshd_config
+RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+RUN echo "root:\$6\$tc8Hmmou\$ON9bo/sHEY7ElHBiQdDfStNjNgcu1SIC/3vcpzWbGstApb.nRTBNCKqzQ1yOb7kROAQqLacJO8XfCm01BEbg3." | chpasswd -e
 RUN echo PasswordAuthentication yes >> /etc/ssh/sshd_config
 
 
 COPY run.sh run.sh
 RUN chmod a+x run.sh
 
-CMD ./run.sh
+
 EXPOSE 5901 6080
+CMD ./run.sh
