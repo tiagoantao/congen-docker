@@ -8,6 +8,14 @@ University of Montana
 How to run it
 -------------
 
+**Initial note (for more advanced users)**
+
+The docker container runs a VNC and SSH server. If you have a VNC client
+installed you do not need to use the browser interface as it is slower.
+Just point your VNC server to port 5901.
+
+You can also connect directly via ssh. User root, password congen16.
+
 
 **Linux**
 

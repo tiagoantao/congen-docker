@@ -60,6 +60,12 @@ WORKDIR /
 RUN mkdir /data
 VOLUME /data
 
+RUN ssh-keygen -A
+RUN echo root:congen16 | chpasswd
+RUN echo PermitRootLogin yes >> /etc/ssh/sshd_config
+RUN echo PasswordAuthentication yes >> /etc/ssh/sshd_config
+
+
 COPY run.sh run.sh
 RUN chmod a+x run.sh
 
