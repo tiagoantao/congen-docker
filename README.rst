@@ -59,7 +59,10 @@ You will have root access and that is fine. There will be no special user.
 
 - Start a browser pointing to the address ``http://127.0.0.1:6080``
 
-- Password is `congen16`
+- Password is ``congen16``
+
+- If you try to restart the machine, make sure the previous one is killed:
+``docker ps; docker rm -f your_image``
 
 
 

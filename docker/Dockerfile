@@ -3,6 +3,7 @@ MAINTAINER tiagoantao@gmail.com
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
+RUN apt-get install -y openssh-server
 RUN apt-get install -y xfce4 vnc4server
 RUN apt-get install -y build-essential zlib1g-dev libgsl0-dev
 RUN apt-get install -y unzip
@@ -18,18 +19,19 @@ RUN conda install -y bwa samtools picard
 RUN conda install -y vcftools plink2
 RUN conda install -y stacks
 
+RUN mkdir /var/run/sshd
+RUN ssh-keygen -A
+RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+RUN echo "root:\$6\$tc8Hmmou\$ON9bo/sHEY7ElHBiQdDfStNjNgcu1SIC/3vcpzWbGstApb.nRTBNCKqzQ1yOb7kROAQqLacJO8XfCm01BEbg3." | chpasswd -e
+RUN echo PasswordAuthentication yes >> /etc/ssh/sshd_config
+
+
 
 RUN git clone --recursive https://github.com/mfumagalli/ngsTools.git
 WORKDIR ngsTools
 RUN make
 WORKDIR /
 RUN cp /ngsTools/angsd/angsd /usr/bin
-
-
-#RUN git clone https://github.com/angsd/angsd.git
-#WORKDIR angsd
-#RUN make
-#WORKDIR /
 
 
 RUN wget http://www.mstmap.org/MSTMap.source.tar.gz
@@ -43,7 +45,6 @@ RUN mkdir /bincode
 WORKDIR /bincode
 RUN unzip ../bincode
 WORKDIR /
-
 
 
 RUN mkdir /root/.vnc
@@ -61,13 +62,6 @@ WORKDIR /
 
 RUN mkdir /data
 VOLUME /data
-
-RUN apt-get install -y openssh-server
-RUN mkdir /var/run/sshd
-RUN ssh-keygen -A
-RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
-RUN echo "root:\$6\$tc8Hmmou\$ON9bo/sHEY7ElHBiQdDfStNjNgcu1SIC/3vcpzWbGstApb.nRTBNCKqzQ1yOb7kROAQqLacJO8XfCm01BEbg3." | chpasswd -e
-RUN echo PasswordAuthentication yes >> /etc/ssh/sshd_config
 
 
 COPY run.sh run.sh
