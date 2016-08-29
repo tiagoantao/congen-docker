@@ -64,8 +64,8 @@ RUN conda create -n python2 python=2
 COPY prepare_negui.sh /
 RUN chmod a+x prepare_negui.sh
 RUN ./prepare_negui.sh
-
 RUN git clone https://github.com/popgengui/negui.git
+
 
 RUN mkdir /data
 VOLUME /data
@@ -73,7 +73,6 @@ VOLUME /data
 
 COPY run.sh run.sh
 RUN chmod a+x run.sh
-
 
 
 EXPOSE 5901 6080
