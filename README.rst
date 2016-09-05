@@ -25,7 +25,7 @@ You will have root access and that is fine. There will be no special user.
 
 - Start it
 
-- Pull tiagoantao/congen_docker (using the search box)
+- Pull tiagoantao/congen-docker (using the search box)
 
 - Make the congen container is running (UI - see below)
 
