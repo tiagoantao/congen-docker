@@ -14,7 +14,7 @@ The docker container runs a VNC and SSH server. If you have a VNC client
 installed you do not need to use the browser interface as it is slower.
 Just point your VNC server to port 5901.
 
-You can also connect directly via ssh. User root, password congen16.
+You can also connect directly via ssh. User root, password congen17.
 
 You will have root access and that is fine. There will be no special user.
 
@@ -39,7 +39,7 @@ You will have root access and that is fine. There will be no special user.
 
 - This should start a browser
 
-- Password is `congen16`
+- Password is `congen17`
 
 
 
@@ -59,7 +59,7 @@ You will have root access and that is fine. There will be no special user.
 
 - Start a browser pointing to the address ``http://127.0.0.1:6080``
 
-- Password is ``congen16``
+- Password is ``congen17``
 
 - If you try to restart the machine, make sure the previous one is killed:
 ``docker ps; docker rm -f your_image``
