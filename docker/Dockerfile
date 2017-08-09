@@ -26,27 +26,6 @@ RUN echo "root:\$6\$tc8Hmmou\$ON9bo/sHEY7ElHBiQdDfStNjNgcu1SIC/3vcpzWbGstApb.nRT
 RUN echo PasswordAuthentication yes >> /etc/ssh/sshd_config
 
 
-
-RUN git clone --recursive https://github.com/mfumagalli/ngsTools.git
-WORKDIR ngsTools
-RUN make
-WORKDIR /
-RUN cp /ngsTools/angsd/angsd /usr/bin
-
-
-RUN wget http://www.mstmap.org/MSTMap.source.tar.gz
-RUN tar zxf MSTMap.source.tar.gz
-WORKDIR /MSTMap
-RUN make
-WORKDIR /
-
-RUN wget https://sourceforge.net/projects/lepmap2/files/binary%2Bcode.zip/download -O bincode.zip
-RUN mkdir /bincode
-WORKDIR /bincode
-RUN unzip ../bincode
-WORKDIR /
-
-
 RUN mkdir /root/.vnc
 RUN echo congen16 > pass; echo congen16 >> pass; vncpasswd < pass; rm pass
 COPY xstartup /root/.vnc
@@ -55,7 +34,7 @@ RUN chmod a+x /root/.vnc/xstartup
 RUN git clone https://github.com/kanaka/noVNC.git
 COPY launch.sh /noVNC/utils
 WORKDIR /noVNC
-RUN cp vnc_auto.html index.html
+RUN cp vnc.html index.html
 WORKDIR /noVNC/utils
 RUN git clone https://github.com/kanaka/websockify
 WORKDIR /
@@ -65,6 +44,14 @@ COPY prepare_negui.sh /
 RUN chmod a+x prepare_negui.sh
 RUN ./prepare_negui.sh
 RUN git clone https://github.com/popgengui/negui.git
+
+RUN conda install -y r r-vegan
+RUN conda install -y bioconductor-qvalue
+
+RUN echo "source('https://bioconductor.org/biocLite.R')\nbiocLite('LEA')" > R.inst
+RUN echo "install.packages('RepeatABEL', repos='http://cran.us.r-project.org')" >>R.inst
+RUN R --no-save < R.inst
+
 
 
 RUN mkdir /data
