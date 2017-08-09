@@ -18,6 +18,8 @@ RUN conda config --add channels r
 RUN conda install -y bwa samtools picard
 RUN conda install -y vcftools plink2
 RUN conda install -y stacks
+RUN conda install -y r r-vegan
+RUN conda install -y bioconductor-qvalue
 
 RUN mkdir /var/run/sshd
 RUN ssh-keygen -A
@@ -45,13 +47,15 @@ RUN chmod a+x prepare_negui.sh
 RUN ./prepare_negui.sh
 RUN git clone https://github.com/popgengui/negui.git
 
-RUN conda install -y r r-vegan
-RUN conda install -y bioconductor-qvalue
 
 RUN echo "source('https://bioconductor.org/biocLite.R')\nbiocLite('LEA')" > R.inst
 RUN echo "install.packages('RepeatABEL', repos='http://cran.us.r-project.org')" >>R.inst
 RUN R --no-save < R.inst
 
+RUN git clone https://github.com/arunsethuraman/ima2p.git
+WORKDIR /ima2p
+RUN chmod a+x configure; ./configure; make install
+WORKDIR /
 
 
 RUN mkdir /data
@@ -62,5 +66,5 @@ COPY run.sh run.sh
 RUN chmod a+x run.sh
 
 
-EXPOSE 5901 6080
+EXPOSE 22 5901 6080
 CMD ./run.sh
