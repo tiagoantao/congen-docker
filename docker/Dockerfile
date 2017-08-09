@@ -6,7 +6,7 @@ RUN apt-get update
 RUN apt-get install -y openssh-server
 RUN apt-get install -y xfce4 vnc4server
 RUN apt-get install -y build-essential zlib1g-dev libgsl0-dev
-RUN apt-get install -y unzip
+RUN apt-get install -y unzip tmux screen
 RUN apt-get install -y firefox-esr
 RUN apt-get install -y net-tools
 
@@ -22,7 +22,7 @@ RUN conda install -y stacks
 RUN mkdir /var/run/sshd
 RUN ssh-keygen -A
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
-RUN echo "root:\$6\$mLg.X6ck$sB8I0iRpbf26tAHNHkhE0RtAWjbWnsCQCos8a7zgdjlvJOznuyGJ2yN3yfFPXpuE3xSejxNyPHLDXMKle01Jg." | chpasswd -e
+RUN echo "root:congen17" | chpasswd
 RUN echo PasswordAuthentication yes >> /etc/ssh/sshd_config
 
 
