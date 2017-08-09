@@ -22,12 +22,12 @@ RUN conda install -y stacks
 RUN mkdir /var/run/sshd
 RUN ssh-keygen -A
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
-RUN echo "root:\$6\$tc8Hmmou\$ON9bo/sHEY7ElHBiQdDfStNjNgcu1SIC/3vcpzWbGstApb.nRTBNCKqzQ1yOb7kROAQqLacJO8XfCm01BEbg3." | chpasswd -e
+RUN echo "root:\$6\$mLg.X6ck$sB8I0iRpbf26tAHNHkhE0RtAWjbWnsCQCos8a7zgdjlvJOznuyGJ2yN3yfFPXpuE3xSejxNyPHLDXMKle01Jg." | chpasswd -e
 RUN echo PasswordAuthentication yes >> /etc/ssh/sshd_config
 
 
 RUN mkdir /root/.vnc
-RUN echo congen16 > pass; echo congen16 >> pass; vncpasswd < pass; rm pass
+RUN echo congen17 > pass; echo congen17 >> pass; vncpasswd < pass; rm pass
 COPY xstartup /root/.vnc
 RUN chmod a+x /root/.vnc/xstartup
 
