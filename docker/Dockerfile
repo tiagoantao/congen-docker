@@ -4,7 +4,7 @@ MAINTAINER tiagoantao@gmail.com
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get install -y openssh-server
-RUN apt-get install -y xfce4 vnc4server
+RUN apt-get install -y lxde vnc4server
 RUN apt-get install -y build-essential zlib1g-dev libgsl0-dev
 RUN apt-get install -y unzip tmux screen
 RUN apt-get install -y firefox-esr
@@ -18,7 +18,7 @@ RUN conda config --add channels r
 RUN conda install -y bwa samtools picard
 RUN conda install -y vcftools plink2
 RUN conda install -y stacks
-RUN conda install -y r r-vegan
+RUN conda install -y r r-vegan r-devtools
 RUN conda install -y bioconductor-qvalue
 
 RUN mkdir /var/run/sshd
@@ -46,16 +46,27 @@ COPY prepare_negui.sh /
 RUN chmod a+x prepare_negui.sh
 RUN ./prepare_negui.sh
 RUN git clone https://github.com/popgengui/negui.git
+WORKDIR /negui
+RUN git checkout origin/develop
+RUN git checkout -b dev
+WORKDIR /
 
 
+RUN ln -s /bin/tar /bin/gtar
 RUN echo "source('https://bioconductor.org/biocLite.R')\nbiocLite('LEA')" > R.inst
-RUN echo "install.packages('RepeatABEL', repos='http://cran.us.r-project.org')" >>R.inst
+RUN echo "install.packages('RepeatABEL', repos='http://cran.us.r-project.org')" >> R.inst
+RUN echo "devtools::install_github('ngthomas/microhaplot', build_vignettes = TRUE)" >> R.inst
 RUN R --no-save < R.inst
 
 RUN git clone https://github.com/arunsethuraman/ima2p.git
 WORKDIR /ima2p
 RUN chmod a+x configure; ./configure; make install
 WORKDIR /
+
+
+RUN apt-get install -y xfce4-terminal
+RUN apt-get remove -y lxterminal
+
 
 
 RUN mkdir /data
