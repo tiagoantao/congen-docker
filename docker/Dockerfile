@@ -2,34 +2,14 @@ FROM continuumio/anaconda3
 MAINTAINER tiagoantao@gmail.com
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update
-RUN apt-get install -y openssh-server
-RUN apt-get install -y lxde vnc4server
-RUN apt-get install -y build-essential zlib1g-dev libgsl0-dev
-RUN apt-get install -y unzip tmux screen
-RUN apt-get install -y firefox-esr
-RUN apt-get install -y net-tools
+RUN apt-get update; apt-get install -y openssh-server lxde vnc4server build-essential zlib1g-dev libgsl0-dev -y unzip tmux screen firefox-esr net-tools xfce4-terminal; apt-get remove -y lxterminal; apt-get clean
 
-RUN conda update --all
-RUN conda config --add channels bioconda
-RUN conda config --add channels r
+RUN conda update --all; conda config --add channels r; conda config --add channels bioconda;conda install -y bwa samtools picard vcftools plink2 stacks r r-vegan r-devtools bioconductor-qvalue;
+
+RUN mkdir /var/run/sshd; ssh-keygen -A; sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config; echo "root:congen17" | chpasswd; echo PasswordAuthentication yes >> /etc/ssh/sshd_config;
 
 
-RUN conda install -y bwa samtools picard
-RUN conda install -y vcftools plink2
-RUN conda install -y stacks
-RUN conda install -y r r-vegan r-devtools
-RUN conda install -y bioconductor-qvalue
-
-RUN mkdir /var/run/sshd
-RUN ssh-keygen -A
-RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
-RUN echo "root:congen17" | chpasswd
-RUN echo PasswordAuthentication yes >> /etc/ssh/sshd_config
-
-
-RUN mkdir /root/.vnc
-RUN echo congen17 > pass; echo congen17 >> pass; vncpasswd < pass; rm pass
+RUN mkdir /root/.vnc; echo congen17 > pass; echo congen17 >> pass; vncpasswd < pass; rm pass
 COPY xstartup /root/.vnc
 RUN chmod a+x /root/.vnc/xstartup
 
@@ -41,21 +21,15 @@ WORKDIR /noVNC/utils
 RUN git clone https://github.com/kanaka/websockify
 WORKDIR /
 
-RUN conda create -n python2 python=2
 COPY prepare_negui.sh /
-RUN chmod a+x prepare_negui.sh
-RUN ./prepare_negui.sh
-RUN git clone https://github.com/popgengui/negui.git
+RUN chmod a+x prepare_negui.sh; conda create -n python2 python=2; ./prepare_negui.sh; git clone https://github.com/popgengui/negui.git
 WORKDIR /negui
-RUN git checkout origin/develop
-RUN git checkout -b dev
+RUN git checkout origin/develop; git checkout -b dev
 WORKDIR /
 
 
 RUN ln -s /bin/tar /bin/gtar
-RUN echo "source('https://bioconductor.org/biocLite.R')\nbiocLite('LEA')" > R.inst
-RUN echo "install.packages('RepeatABEL', repos='http://cran.us.r-project.org')" >> R.inst
-RUN echo "devtools::install_github('ngthomas/microhaplot', build_vignettes = TRUE)" >> R.inst
+RUN echo "source('https://bioconductor.org/biocLite.R')\nbiocLite('LEA')\ninstall.packages('RepeatABEL', repos='http://cran.us.r-project.org')\ndevtools::install_github('ngthomas/microhaplot', build_vignettes = TRUE)" > R.inst
 RUN R --no-save < R.inst
 
 RUN git clone https://github.com/arunsethuraman/ima2p.git
@@ -64,8 +38,6 @@ RUN chmod a+x configure; ./configure; make install
 WORKDIR /
 
 
-RUN apt-get install -y xfce4-terminal
-RUN apt-get remove -y lxterminal
 
 
 
