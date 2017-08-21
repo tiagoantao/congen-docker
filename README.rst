@@ -8,6 +8,10 @@ University of Montana
 How to run it
 -------------
 
+**Requirements**
+
+You should have a zip file with data (provided by the course).
+
 **Initial note (for more advanced users)**
 
 The docker container runs a VNC and SSH server. If you have a VNC client
@@ -28,6 +32,12 @@ You will have root access and that is fine. There will be no special user.
 - Pull tiagoantao/congen-docker (using the search box)
 
 - Make the congen container is running (UI - see below)
+
+- Map your data volume (see below, the purple arrow)
+
+.. image:: Docker_screenshot_volumes.png
+
+- Restart the machine (look for the button on top)
 
 - Go to settings (see image below)
 
