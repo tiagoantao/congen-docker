@@ -2,7 +2,7 @@ FROM continuumio/anaconda3
 MAINTAINER tiagoantao@gmail.com
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update; apt-get install -y openssh-server lxde vnc4server build-essential zlib1g-dev libgsl0-dev -y unzip tmux screen firefox-esr net-tools xfce4-terminal; apt-get remove -y lxterminal; apt-get clean
+RUN apt-get update; apt-get install -y emacs vim nano openssh-server lxde vnc4server build-essential zlib1g-dev libgsl0-dev -y unzip tmux screen firefox-esr net-tools xfce4-terminal; apt-get remove -y lxterminal; apt-get clean
 
 RUN conda update --all; conda config --add channels r; conda config --add channels bioconda;conda install -y bwa samtools picard vcftools plink2 stacks r r-vegan r-devtools bioconductor-qvalue;
 
