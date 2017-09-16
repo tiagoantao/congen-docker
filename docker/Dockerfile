@@ -37,8 +37,12 @@ WORKDIR /ima2p
 RUN chmod a+x configure; ./configure; make install
 WORKDIR /
 
+RUN wget http://popgen.net/ms.tar.gz; tar zxf ms.tar.gz
+WORKDIR msdir
+RUN gcc -O3 -o ms ms.c streec.c rand1.c -lm; cp ms /usr/bin
+WORKDIR /
 
-
+RUN wget https://bio.cst.temple.edu/~hey/downloads/IMfig.py
 
 
 RUN mkdir /data
