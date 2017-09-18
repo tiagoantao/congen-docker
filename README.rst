@@ -74,6 +74,19 @@ You will have root access and that is fine. There will be no special user.
 - If you try to restart the machine, make sure the previous one is killed:
 ``docker ps; docker rm -f your_image``
 
+**If you get no connection to server on noVNC here is an alternative path**
+
+- Stop the container
+
+- On the Windows/Mac desktop click the "Docker Quickstart terminal"
+
+- On the terminal type ``docker run -p5901:5901 -p6080:6080 tiagoantao/congen-docker``
+
+- If you get a error like ``port is already allocated`` make sure you stopped the container
+
+- On the container you will get a ``Navigate to the URL``. Put it on your browser
+
+- Password is ``congen2017``
 
 
 
