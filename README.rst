@@ -61,7 +61,8 @@ You will have root access and that is fine. There will be no special user.
 
 - If you get a error like ``port is already allocated`` make sure you stopped the container
 
-- On the container you will get a ``Navigate to the URL``. Put it on your browser
+- Now, use the IP from the **screenshot** above with the port 6080, in this case:
+``http://192.168.99.100:6080/``
 
 - Password is ``congen2017``
 
