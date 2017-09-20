@@ -64,7 +64,7 @@ You will have root access and that is fine. There will be no special user.
 - Now, use the IP from the **screenshot** above with the port 6080, in this case:
 ``http://192.168.99.100:6080/``
 
-- Password is ``congen2017``
+- Password is ``congen17``
 
 
 
