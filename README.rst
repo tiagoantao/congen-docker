@@ -57,7 +57,7 @@ You will have root access and that is fine. There will be no special user.
 
 - On the Windows/Mac desktop click the "Docker Quickstart terminal"
 
-- On the terminal type ``docker run -p5901:5901 -p6080:6080 -v/path/to/data:/data tiagoantao/congen-docker``
+- On the terminal type ``docker run -p 5901:5901 -p 6080:6080 -v /path/to/data:/data tiagoantao/congen-docker``
 
 - If you get a error like ``port is already allocated`` make sure you stopped the container
 
@@ -79,7 +79,7 @@ You will have root access and that is fine. There will be no special user.
 
 - ``docker pull tiagoantao/congen-docker``
 
-- ``docker run -p 6080:6080 -v /path_to_your_data:/data -t tiagoantao/congen-docker``
+- ``docker run -p 5901:5901 -p 6080:6080 -v /path_to_your_data:/data -t tiagoantao/congen-docker``
 
 - Change `path_to_your_data` with the path to your data.
 
