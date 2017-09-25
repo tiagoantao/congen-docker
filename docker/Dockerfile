@@ -44,6 +44,8 @@ WORKDIR /
 
 RUN wget https://bio.cst.temple.edu/~hey/downloads/IMfig.py
 
+RUN conda install -c bioconda picard
+
 
 RUN mkdir /data
 VOLUME /data
